@@ -1,8 +1,36 @@
 {% extends 'base.html'%}
+{% block navbar %}
+    {% include 'navbar.html' %}
+{% endblock%}
 {% block content %}
-
-<div>
-    <a href="/timeline">Timeline</a>
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<div class="wrapper-view" id="firstpage">
+    <div class="container-fluid" >
+        <div id="title">
+            <h2 class="typewriter" style="color: white; text-align: center; font-weight: 40px; font-size: 70px;">Welcome to Bestpitch.</h2>
+            <h4 style="color: white; text-align: center; font-weight: 40px; font-size: 40px;"> Get your idea out there</h4>
+        </div>
+        <div class="row" id="intro">
+            <div class="col-md-4" class="menu" id="menu1">
+                <a href="/timeline">
+                    <i class="fas fa-comments"></i>
+                    <p id="select1">Comment on ideas</p>
+                </a>
+        </div>
+        <div class="col-md-4" class="menu" id="menu2">
+            <a href="/timeline" >
+                <i class="fas fa-lightbulb"></i>
+                <p id="select2">Make a pitch</p>
+            </a>
+        </div>
+        <div class="col-md-4" class="menu" id="menu3">
+            <a href="/authenticate/login">
+                <i class="fas fa-edit"></i>
+                <p id="select3">Register / Login</p></a>
+        </div>
+        </div>
+    </div>
 </div>
-
 {% endblock %}
+
