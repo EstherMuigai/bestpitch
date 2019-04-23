@@ -1,9 +1,7 @@
 {% extends 'base.html'%}
-<div id="navcustom">
-    {% block navbar %}
-        {% include 'navbar.html' %}
-    {% endblock %}
-</div>
+{% block navbar %}
+    {% include 'navbar.html' %}
+{% endblock %}
 {% block content %}
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
@@ -36,7 +34,7 @@
                 <p>0</p>
             </div>
             <div class="col-md-1">
-                <a class="btn btn-lg" href="#" role="button" style="margin-top:10px; color: purple;border:solid 1px purple;">Edit Profile</a>
+                <a class="btn btn-lg" href="/user/{{user.username}}/update" role="button" style="margin-top:10px; color: purple;border:solid 1px purple;">Edit Profile</a>
             </div>
     </div>
     <div class="row" id="mainprofile">
@@ -45,6 +43,7 @@
                     <p>@{{user.username}}</p>
                     <p>I'm feeling</p>
                     {% if user.bio %}
+                        <h5 style="font-weight:bold;">Bio</h6>
                         <p> {{user.bio}}</p>
                     {%else%}
                         <p> {{user.username| capitalize}} has no bio </p>
@@ -63,7 +62,7 @@
                         <a style="color:purple;font-size: 20px;">Posts&Comments</a>
                     </div>
                 </div>
-                <div class="row" style="width:100%; border-bottom: solid 1px grey;margin: 0;">
+                <div class="row" style="width:100%; border-bottom: solid 1px grey;margin: 0;padding-bottom: 10px;">
                     <div style="border-bottom: solid 4px purple;height:250px;">
                             <h4 style="font-weight: bold;text-align: center;margin-top:20px;">Welcome to Bestpitch {{user.username}}!</h4>
                             <p style="text-align: center;color: #A7A5C6; font-size: 20px;">You can start by posting a pitch and connecting with other users</p>

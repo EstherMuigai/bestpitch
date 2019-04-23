@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block navbar %}
+    {% include 'navbar.html' %}
+{% endblock %}
+{% block content %}
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<div class="wrapper-view" style="background-color: #ECE2D0;font-family: Arial, Helvetica, sans-serif;padding-bottom: 40px;">
+    <div class="container-fluid" id="profilepage">
+        <a href="/" class="row" style="text-decoration:none;">
+            <i class="far fa-image" style="color:white;font-size:50px;margin-left:600px;"></i>
+            <h2 style="color:white; text-align: center; font-weight: 40px; font-size: 20px;">Change cover photo</h2>
+        </a>
+        <div class="row">
+            <div class="col-md-4">
+                {% if user.profile_pic_path %}
+                <a href="/" class="row" style="text-decoration:none;">
+                    <i class="far fa-image" style="color:white;font-size:50px;margin-left:600px;"></i>
+                    <h2 style="color:white; text-align: center; font-weight: 40px; font-size: 20px;">Change cover photo</h2>
+                </a>
+                    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail" id="profpic">
+                {%else%}
+                <a href="/" style="text-decoration:none;text-align: center;">
+                    <div id="profpic" style="margin-top: -110px;">
+                        <i class="far fa-image" style="color:white;font-size:50px;margin-left:10px;">
+                            </i>
+                        <p>Change your </p>
+                        <p>profile photo</p>
+                    </div>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-top:100px;color:purple;">
+        <div class="col-md-6">
+            {{wtf.quick_form(form)}}
+        </div>
+    </div>
+
+{% endblock %}
