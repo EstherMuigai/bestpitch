@@ -15,6 +15,7 @@ def timeline():
     return render_template('timeline.html')
 
 @main.route('/user/profile/<uname>')
+@login_required
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
 

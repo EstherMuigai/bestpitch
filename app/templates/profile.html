@@ -1,33 +1,88 @@
 {% extends 'base.html'%}
-{% block navbar %}
-    {% include 'navbar.html' %}
-{% endblock %}
-{% block content %}
-<div class="wrapper-view" id="profilepage">
-<div class="container">
-        <div class="row" style="background-color:black;">
-                <!-- displaying  Username-->
-                  <div class="col-md-4">
-                    <h3> {{user.username| capitalize}} </h3>
-                
-                    <!--Displaying user bio-->
-                    {% if user.bio %}
-                      <p> {{user.bio}}</p>
-                    {%else%}
-                      <p> {{user.username| capitalize}} has no bio </p>
-                    {% endif %}
-                  </div>
-                
-                  <!--Display profile photo-->
-                  <div class="col-md-4">
-                
-                    {% if user.profile_pic_path %}
-                    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
-                    {%else%}
-                    <p>No profile picture</p>
-                    {% endif %}
-                  </div>
-                </div>
+<div id="navcustom">
+    {% block navbar %}
+        {% include 'navbar.html' %}
+    {% endblock %}
 </div>
+{% block content %}
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<div class="wrapper-view" style="background-color: #ECE2D0;font-family: Arial, Helvetica, sans-serif;padding-bottom: 40px;">
+    <div class="container-fluid" id="profilepage">
+        <div class="row">
+            <h2 class="typewriter" style="color:#95C623; text-align: center; font-weight: 40px; font-size: 70px;">Pitch. Like. Comment.</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                {% if user.profile_pic_path %}
+                    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail" id="profpic">
+                {%else%}
+                    <i class="fas fa-camera" style="text-align:center;color:white;padding-top:8%;" id="profpic"></i>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="row" id="profstats" style="font-weight: bold;font-size: 20px;text-align: center;">
+            <div class="col-md-2">
+                <p>Posts</p>
+                <p>0</p>
+            </div>
+            <div class="col-md-2">
+                <p>Following</p>
+                <p>0</p>
+            </div>
+            <div class="col-md-2">
+                <p>Followers</p>
+                <p>0</p>
+            </div>
+            <div class="col-md-1">
+                <a class="btn btn-lg" href="#" role="button" style="margin-top:10px; color: purple;border:solid 1px purple;">Edit Profile</a>
+            </div>
+    </div>
+    <div class="row" id="mainprofile">
+            <div class="col-md-2" id="bio">
+                {% if user %}
+                    <p>@{{user.username}}</p>
+                    <p>I'm feeling</p>
+                    {% if user.bio %}
+                        <p> {{user.bio}}</p>
+                    {%else%}
+                        <p> {{user.username| capitalize}} has no bio </p>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="col-md-6" id="myposts">
+                <div class="row" style="width:100%; border-bottom: solid 1px grey;margin: 0;height:50px;">
+                    <div class="col-md-4">
+                        <a style="color:purple;font-size: 20px;">My Posts</a>
+                    </div>
+                    <div class="col-md-4">
+                        <a style="color:purple;font-size: 20px;">Liked Posts</a>
+                    </div>
+                    <div class="col-md-4">
+                        <a style="color:purple;font-size: 20px;">Posts&Comments</a>
+                    </div>
+                </div>
+                <div class="row" style="width:100%; border-bottom: solid 1px grey;margin: 0;">
+                    <div style="border-bottom: solid 4px purple;height:250px;">
+                            <h4 style="font-weight: bold;text-align: center;margin-top:20px;">Welcome to Bestpitch {{user.username}}!</h4>
+                            <p style="text-align: center;color: #A7A5C6; font-size: 20px;">You can start by posting a pitch and connecting with other users</p>
+                            <a class="btn btn-primary btn-lg" href="#" role="button" style="margin-left:250px;background-color: purple;color: white;border:purple;">First Pitch</a>
+                            <div class="row">
+                                <div class="col-md-4" style="margin-left:210px;">
+                                    {% if user.profile_pic_path %}
+                                        <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail" id="profpic" style="border:purple;">
+                                    {%else%}
+                                        <img src="https://image.freepik.com/free-vector/modern-abstract-background-with-purple-geometric-shapes-elements_1302-5268.jpg" alt="" class="img-thumbnail" id="profpic" style="border:purple;">
+                                    {% endif %}
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" id="utilities">
+                <p>sjqhwDBJJDAWEDIWNDMWENM</p>
+            </div>
+        </div>
 </div>
 {% endblock %}
