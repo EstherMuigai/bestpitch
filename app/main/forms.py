@@ -4,4 +4,4 @@ from wtforms import TextAreaField,SubmitField
 
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Update bio.',validators = [Required()])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Save Changes')
