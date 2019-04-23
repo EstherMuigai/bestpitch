@@ -8,9 +8,6 @@
 <div class="wrapper-view" style="background-color: #ECE2D0;font-family: Arial, Helvetica, sans-serif;padding-bottom: 40px;">
     <div class="container-fluid" id="profilepage">
         <div class="row">
-            <h2 class="typewriter" style="color:#95C623; text-align: center; font-weight: 40px; font-size: 70px;">Pitch. Like. Comment.</h2>
-        </div>
-        <div class="row">
             <div class="col-md-4">
                 {% if user.profile_pic_path %}
                     <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail" id="profpic">
