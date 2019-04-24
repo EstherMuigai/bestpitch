@@ -1,21 +1,29 @@
 from flask import render_template,request,redirect,url_for,abort
-from flask_login import login_required
+from flask_login import login_required,current_user
 from . import main
-from .forms import UpdateProfile
+from .forms import UpdateProfile,PostAPitch
 from .. import db,photos
-from ..models import User
+from ..models import User,Pitch
 
 @main.route('/')
 def landingpage():
 
     return render_template('landingpage.html')
 
-@main.route('/timeline')
+@main.route('/timeline',methods=['GET','POST'])
 @login_required
 def timeline():
+    form = PostAPitch()
 
-    return render_template('timeline.html')
+    if form.validate_on_submit():
+        new_pitch = Pitch(upvotes=0,downvotes=0,title=form.title.data,content=form.content.data,user_id=current_user.id)
+        new_pitch.save_pitch()
 
+    pitches=Pitch.get_pitches()
+
+    return render_template('timeline.html',form=form,pitches=pitches)
+
+   
 @main.route('/user/profile/<uname>')
 @login_required
 def profile(uname):
@@ -42,7 +50,7 @@ def update_profile(uname):
 
         return redirect(url_for('.profile',uname=user.username))
 
-    return render_template('update.html',form =form,user =user)
+    return render_template('update.html',form=form,user =user)
 
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
