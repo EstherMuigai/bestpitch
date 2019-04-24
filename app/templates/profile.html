@@ -8,9 +8,9 @@
 <div class="wrapper-view" style="background-color: #ECE2D0;font-family: Arial, Helvetica, sans-serif;padding-bottom: 40px;">
     <div class="container-fluid" id="profilepage">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4" >
                 {% if user.profile_pic_path %}
-                    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail" id="profpic">
+                    <img src="{{url_for('static',filename=user.profile_pic_path)}}" style="margin-top:70px;"alt="" class="img-thumbnail" id="profpic">
                 {%else%}
                     <i class="fas fa-camera" style="text-align:center;color:white;padding-top:8%;" id="profpic"></i>
                 {% endif %}
@@ -59,11 +59,56 @@
                         <a style="color:purple;font-size: 20px;">Posts&Comments</a>
                     </div>
                 </div>
+                {% for pitch in pitches %}
+                    {% if pitch.user_id == current_user.id %}
+        <div class="row" style="width:100%; border-bottom: solid 1px grey;margin: 0;padding-top:10px;padding-bottom: 10px;">
+        <div class="col-md-2" >
+                    {% if user.profile_pic_path %}
+                        <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail" 
+                        style="border-radius:50%; width:70px;height:70px;padding:0;">
+                    {% endif %}
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    {% for user in users %}
+                        {% if user.id == pitch.user_id %}
+                            <p style="font-weight: bold;">{{user.username}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    <p>{{pitch.title}}</p>
+                    <p>{{pitch.content}}</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <i class="fas fa-thumbs-up" style="font-size:20px;margin: 0;"></i>
+                            </div>
+                            <div class="col-md-4">
+                                <p>{{pitch.upvotes}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-6">
+                                        <i class="fas fa-thumbs-down" style="font-size:20px;margin: 0;"></i>
+                                </div>
+                                <div class="col-md-4">
+                                        <p>{{pitch.downvotes}}</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        {% endif %}
+        {% endfor %}
                 <div class="row" style="width:100%; border-bottom: solid 1px grey;margin: 0;padding-bottom: 10px;">
                     <div style="border-bottom: solid 4px purple;height:250px;">
                             <h4 style="font-weight: bold;text-align: center;margin-top:20px;">Welcome to Bestpitch {{user.username}}!</h4>
                             <p style="text-align: center;color: #A7A5C6; font-size: 20px;">You can start by posting a pitch and connecting with other users</p>
-                            <a class="btn btn-primary btn-lg" href="#" role="button" style="margin-left:250px;background-color: purple;color: white;border:purple;">First Pitch</a>
+                            <a class="btn btn-primary btn-lg" href="/timeline" role="button" style="margin-left:250px;background-color: purple;color: white;border:purple;">First Pitch</a>
                             <div class="row">
                                 <div class="col-md-4" style="margin-left:210px;">
                                     {% if user.profile_pic_path %}

@@ -37,7 +37,12 @@
 }
 
 #mainprofile {
-  margin-top:70px;
+  margin-top:40px;
+  margin-left:40px;
+}
+
+#timeline {
+  margin-top: 40px;
   margin-left:40px;
 }
 

@@ -20,8 +20,9 @@ def timeline():
         new_pitch.save_pitch()
 
     pitches=Pitch.get_pitches()
+    users = User.query.all()
 
-    return render_template('timeline.html',form=form,pitches=pitches)
+    return render_template('timeline.html',form=form,pitches=pitches,users=users)
 
    
 @main.route('/user/profile/<uname>')
@@ -31,8 +32,9 @@ def profile(uname):
 
     if user is None:
         abort(404)
-
-    return render_template('profile.html', user = user)
+    pitches = Pitch.query.order_by(Pitch.posted.desc()).all()
+    
+    return render_template('profile.html', user = user, pitches=pitches)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
