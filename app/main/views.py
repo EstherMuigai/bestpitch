@@ -1,9 +1,9 @@
 from flask import render_template,request,redirect,url_for,abort
 from flask_login import login_required,current_user
 from . import main
-from .forms import UpdateProfile,PostAPitch
+from .forms import UpdateProfile,PostAPitch,PostAComment
 from .. import db,photos
-from ..models import User,Pitch
+from ..models import User,Pitch,Comment
 
 @main.route('/')
 def landingpage():
@@ -14,17 +14,15 @@ def landingpage():
 @login_required
 def timeline():
     form = PostAPitch()
-
     if form.validate_on_submit():
         new_pitch = Pitch(upvotes=0,downvotes=0,title=form.title.data,content=form.content.data,user_id=current_user.id)
         new_pitch.save_pitch()
-
-    pitches=Pitch.get_pitches()
+        return redirect(url_for('main.timeline'))
+    pitches= Pitch.get_pitches()
     users = User.query.all()
 
     return render_template('timeline.html',form=form,pitches=pitches,users=users)
-
-   
+ 
 @main.route('/user/profile/<uname>')
 @login_required
 def profile(uname):

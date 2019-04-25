@@ -17,6 +17,7 @@ class Config:
 
 
 class ProdConfig(Config):
+    os.environ.get("DATABASE_URL")
     pass
 
 

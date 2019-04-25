@@ -7,6 +7,10 @@ class UpdateProfile(FlaskForm):
     submit = SubmitField('Save Changes')
 
 class PostAPitch (FlaskForm):
-    title = StringField('Title of the pitch',validators = [Required()])
-    content = TextAreaField('Pitch content.',validators = [Required()])
+    title = StringField('Title',validators = [Required()])
+    content = TextAreaField('Pitch',validators = [Required()])
     submit = SubmitField('Pitch')
+
+class PostAComment (FlaskForm):
+    comment = TextAreaField(validators = [Required()])
+    submit = SubmitField('Comment',validators = [Required()])
